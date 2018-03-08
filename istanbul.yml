@@ -1,0 +1,11 @@
+instrumentation:
+    root: ./src
+    excludes:
+        - ./index.js
+        - '*.spec.js'
+checks:
+    global:
+        statements: 95
+        lines: 95
+        branches: 95
+        functions: 100 
