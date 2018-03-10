@@ -1,4 +1,5 @@
-[
+{
+  "properties": [
     {
       "owner": "carlos",
       "address": {
@@ -45,4 +46,5 @@
       "incomeGenerated": 1200
     }
   ]
+}
   

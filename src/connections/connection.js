@@ -21,7 +21,7 @@ class Connection {
     constructor({ name, username = user, pass = password, db = database, dbHost = host, insecureAuth = true }) {
         this.name = name || 'connection'
         this.user = username
-        this.password = pw
+        this.password = pass
         this.database = db
         this.host = dbHost
         this.insecureAuth = insecureAuth

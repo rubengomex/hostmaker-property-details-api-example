@@ -1,4 +1,4 @@
-const config = require('../../config')
+const config = require('../config')
 
 /**
  * @author Rúben Gomes <ruben.gomes@timewax.com>

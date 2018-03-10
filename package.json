@@ -18,10 +18,10 @@
     "show:apidocs": "npm run build:apidocs && opener apidocs/hostmaker/index.html",
     "build:docs": "npm run build:jsdocs && npm run build:apidocs",
     "show:coverage": "opener ./coverage/lcov-report/index.html",
-    "test:unit": "istanbul cover _mocha -- ./src/api/**/*.spec.js ./src/lib/**/*.spec.js -t 20000 --recursive -R spec --full-trace --require ./test/configuration.js",
+    "test:unit": "istanbul cover _mocha -- ./src/**/*.spec.js ./src/**/**/*.spec.js -t 20000 --recursive -R spec --full-trace --require ./test/configuration.js",
     "test:integration": "mocha -t 20000 ./test/integration/**/*.test.js --recursive --reporter spec --require ./test/configuration.js",
     "test:watch": "npm run test:unit -- -w",
-    "test": "npm run test:unit && npm run setup:db && npm run test:integration && npm run clear:db",
+    "test": "npm run test:unit && npm run test:integration",
     "start:dev": "npm run watch:lint",
     "start": "nodemon .",
     "build": "npm run build:docs && npm run lint && npm t && npm run show:coverage",
@@ -64,6 +64,7 @@
     "istanbul": "1.1.0-alpha.1",
     "jsdoc": "3.5.5",
     "mocha": "3.2.0",
+    "morgan": "1.9.0",
     "nodemon": "1.11.0",
     "opener": "1.4.3",
     "rimraf": "2.6.2",
@@ -78,6 +79,7 @@
     "lodash": "4.16.3",
     "mysql": "2.11.1",
     "nunjucks": "2.5.2",
+    "rg-async": "2.5.2",
     "uuid": "2.0.3"
   }
 }

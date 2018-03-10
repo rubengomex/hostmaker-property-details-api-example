@@ -58,6 +58,7 @@ class MiddlewareHelper {
      */
     static replyProvider(req, res, next) {
         res.reply = data => res.json(MiddlewareHelper.dataReply(data))
+        next()
     }
 
     /**
@@ -90,7 +91,7 @@ class MiddlewareHelper {
      * @param {!Function} next Specifies the next express middleware function to be called.
      */
     static errorHandler(err, req, res, next) {
-        res.status(HttpStatus.BAD_REQUEST).send(MiddlewareHelper.errorReply({ err }))
+        res.status(HttpStatus.SERVER_ERROR).send(MiddlewareHelper.errorReply({ err }))
         next()
     }
 

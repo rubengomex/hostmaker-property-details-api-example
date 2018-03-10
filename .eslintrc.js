@@ -34,6 +34,7 @@ module.exports = {
         'expect': true,
         'config': true,
         'user': true,
-        'sinon': true
+        'sinon': true,
+        'request': true
     }
 };

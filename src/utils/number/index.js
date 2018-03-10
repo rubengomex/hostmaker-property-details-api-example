@@ -1,41 +1,4 @@
 const _ = require('lodash')
-const numeral = require('numeral')
-
-// Setup numeral German
-numeral.language('de', {
-    delimiters: {
-        thousands: '.',
-        decimal: ','
-    },
-    abbreviations: {
-        thousand: 'k',
-        million: 'm',
-        billion: 'b',
-        trillion: 't'
-    },
-    ordinal: () => '.',
-    currency: { symbol: '€' }
-})
-
-// Setup numeral Dutch
-numeral.language('nl', {
-    delimiters: {
-        thousands: '.',
-        decimal: ','
-    },
-    abbreviations: {
-        thousand: 'k',
-        million: 'mln',
-        billion: 'mrd',
-        trillion: 'bln'
-    },
-    ordinal: number => {
-        let remainder = number % 100
-        return (number !== 0 && remainder <= 1) || (remainder === 8 || remainder >= 20) ? 'ste' : 'de'
-    },
-    currency: { symbol: '€ ' }
-})
-numeral.defaultFormat('0,0.00')
 
 /**
  * @author Rúben Gomes <ruben.gomes@timewax.com>
@@ -85,23 +48,6 @@ class NumberUtils {
      */
     static getDefaultNumeric({ number, defaultNumber = 0 } = {}) {
         return NumberUtils.isValidNumber({ number }) ? NumberUtils.parseNumber({ number }) : NumberUtils.parseNumber({ number: defaultNumber })
-    }
-
-    /**
-     * Formats a number using numeral format
-     * @static
-     *
-     * @param {!Object} [opts={}] Specifies the options object.
-     * @param {!Object} [opts.user={}] Specifies the number to be checked.
-     * @param {!String|Number} opts.number Specifies the number to be parsed.
-     * @param {!Object} [opts.myNumeral=numeral] Specifies the numeral instance.
-     s*
-     * @returns {String} The formated numeral number.
-     */
-    static formatNumber({ user = {}, number, myNumeral = numeral } = {}) {
-        myNumeral.language(user.language || 'en')
-        number = typeof number === 'string' ? parseFloat(number) : number
-        return myNumeral(number).format()
     }
 }
 

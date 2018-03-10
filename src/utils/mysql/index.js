@@ -1,6 +1,4 @@
-const _ = require('lodash')
 const SqlString = require('mysql/lib/protocol/SqlString')
-const { ColorUtils } = require('../color')
 
 /**
  * @author Rúben Gomes <ruben.gomes@timewax.com>
@@ -29,42 +27,6 @@ class MySqlUtils {
             })
         })
         return query
-    }
-
-    /**
-     * Utility function to get the mysql response data formated.
-     * @static
-     *
-     * @param {Object[]} data Specifies the mysql data to be formated.
-     *
-     * @returns {Object[]} The formated data.
-     */
-    static getFormattedData(data) {
-        return data.reduce((acc, curr, fieldName) => {
-            const formattedItem = curr.reduce((formattedObj, value, key) => {
-                if (_.isString(value)) {
-                    value = value === 'BOOLEAN(true)' ? true : value === 'BOOLEAN(false)' ? false : value
-                }
-
-                if (_.isBoolean(value)) {
-                    formattedObj[key] = value
-                    return formattedObj
-                }
-
-                if (value.substr(0, 'COLOR'.length) === 'COLOR') {
-                    try {
-                        let decimalValue = parseInt(value.substring('COLOR('.length, value.length - 1))
-                        value = ColorUtils.decimalColorToHexColor({ number: decimalValue })
-                    } catch (err) { }
-
-                    formattedObj[key] = value
-                    return formattedObj
-                }
-            }, {})
-
-            acc.push(formattedItem)
-            return acc
-        }, [])
     }
 
     /**
