@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a StringUtils static class. Responsible layer to provide string utility functions.
  */
 class StringUtils {

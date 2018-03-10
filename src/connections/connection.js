@@ -4,7 +4,7 @@ const { user, password, database, host } = config.get('CLIENT_DB')
 const { MySqlUtils } = require('../utils/index')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a Connection class. Responsible layer for the connection into db.
  */
 class Connection {

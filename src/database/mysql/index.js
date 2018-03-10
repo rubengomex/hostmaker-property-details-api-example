@@ -3,7 +3,7 @@ const Runner = require('../runner')
 const { MySqlConnection } = require('../../connections')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a MySqlRunner class. Responsible layer for the transactions into mysql db.
  * @extends Runner
  */

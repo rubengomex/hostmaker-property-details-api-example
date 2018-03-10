@@ -1,6 +1,6 @@
 /**
  * Defines properties controller
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  */
 
 const Model = require('./model')

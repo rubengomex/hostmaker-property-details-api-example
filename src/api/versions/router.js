@@ -1,6 +1,6 @@
 /**
  * Defines versions routes for HostMaker api example
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  */
 
 const express = require('express')

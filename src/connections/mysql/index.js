@@ -1,7 +1,7 @@
 const Connection = require('../connection')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a MySqlConnection class. Responsible layer for the mysql connection into db.
  * @extends Connection
  */

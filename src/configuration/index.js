@@ -1,7 +1,7 @@
 const config = require('../config')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a Configuration static class. Responsible layer to get the configuration properties.
  */
 class Configuration {

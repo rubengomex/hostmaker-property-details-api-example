@@ -2,7 +2,7 @@ const config = require('../configuration')
 const { HttpStatus } = require('../utils/index')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a MiddlewareHelper class. Responsible layer to provide middleware helpers.
  */
 class MiddlewareHelper {

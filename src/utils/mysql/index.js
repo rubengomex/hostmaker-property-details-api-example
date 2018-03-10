@@ -1,7 +1,7 @@
 const SqlString = require('mysql/lib/protocol/SqlString')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a MySqlUtils static class. Responsible layer to provide mysql utility functions.
  */
 class MySqlUtils {

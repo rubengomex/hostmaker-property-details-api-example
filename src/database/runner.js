@@ -1,7 +1,7 @@
 const locales = require('../locales')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a Runner class. Responsible layer for the transactions into db.
  */
 class Runner {

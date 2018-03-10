@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a NumberUtils static class. Responsible layer to provide number utility functions.
  */
 class NumberUtils {

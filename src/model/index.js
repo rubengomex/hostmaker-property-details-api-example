@@ -1,7 +1,7 @@
 const { MySqlRunner } = require('../database')
 
 /**
- * @author Rúben Gomes <ruben.gomes@timewax.com>
+ * @author Rúben Gomes <gomesruben21@gmail.com>
  * @classdesc Defines a MiddlewareHelper class. Responsible layer to instantiate a db model class.
  * @extends MySqlRunner
  */
