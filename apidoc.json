@@ -3,5 +3,5 @@
   "version": "0.0.1",
   "description": "Api that allows the user to manage HostMaker property details",
   "title": "HostMaker Property Details API",
-  "url" : "http://localhost:3000/"
+  "url" : "http://localhost:3000"
 }

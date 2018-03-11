@@ -1,4 +1,5 @@
 {
+    "ADD_CORS_HEADERS": true,
     "ENVIRONMENT": "dev",
     "PORT": 3000,
     "CLIENT_DB": {

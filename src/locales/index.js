@@ -1,9 +1,9 @@
 const locales = {
     pt: {
-        theSocketIsClosed: 'This socket is closed',
+        theSocketIsClosed: 'This socket is closed'
     },
     en: {
-        theSocketIsClosed: 'This socket is closed',
+        theSocketIsClosed: 'This socket is closed'
     }
 }
 

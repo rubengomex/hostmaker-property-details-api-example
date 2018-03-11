@@ -12,8 +12,11 @@ class MySqlRunner extends Runner {
      * @constructor
      * @param {!Object} opts Specifies the options for the mysql runner constructor.
      * @param {!String} [opts.name='mysqlRunner'] Specifies the name to attached to the mysql runner.
-     * @param {!Object} opts.user Specifies the current user.
-     * @param {!Object} [opts.Logger] Specifies the logger to use.
+     * @param {!Object} [opts.user={}] Specifies the current user.
+     * @param {!Object} [opts.user.name] Specifies the name of the user.
+     * @param {!Object} [opts.user.pass] Specifies the password of the user.
+     * @param {!Object} [opts.user.db] Specifies the database to use.
+     * @param {!Object} [opts.user.host] Specifies the host to use.
      * @param {!Object} [opts.connection=MySqlConnection] Specifies the connection to use.
      */
     constructor({ name, user: { name: username, pass, db, host: dbHost } = {}, Connection }) {
@@ -27,7 +30,7 @@ class MySqlRunner extends Runner {
      * @param {!Object} opts Specifies the options for the run execution.
      * @param {!String} opts.sql Specifies the mysql query to be executed.
      * @param {!Object} [opts.param={}] Specifies the params to use in the mysql query.
-     * @param {!Number} [opts.attempts=5] Specifies the number of attempts
+     * @param {!Number} [opts.attempts=3] Specifies the number of attempts
      *
      * @returns {Object[]} The retrieved data/content from the db based on the mysql query.
      */

@@ -6,7 +6,7 @@
   "source": {
       "include": ["src"],
       "includePattern": ".js$",
-      "excludePattern": "(node_modules/|docs)"
+      "excludePattern": "(node_modules/|api/|routing/)"
   },
   "plugins": [
       "plugins/markdown",
@@ -15,7 +15,7 @@
   "templates": {
       "cleverLinks"           : true,
       "monospaceLinks"        : false,
-      "systemName"            : "HostMaker property details Api",
+      "systemName"            : "HostMaker Api Example",
       "footer"                : "",
       "copyright"             :  "Copyright © Rúben Gomes",
       "includeDate"           : true,

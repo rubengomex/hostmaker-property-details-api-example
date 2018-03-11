@@ -43,10 +43,9 @@ class Runner {
                     throw err
                 }
             } else {
+                this.connection.close()
                 throw err
             }
-        } finally {
-            this.connection.close()
         }
     }
 }

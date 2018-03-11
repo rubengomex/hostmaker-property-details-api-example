@@ -95,22 +95,6 @@ class Model extends MySqlRunner {
         await this.run({ sql, params, attempts })
         return []
     }
-
-    /**
-     * Removes n model items.
-     * @param {!Object} opts Specifies the options for the find method.
-     * @param {!String} opts.sql Specifies the my sql query to be executed.
-     * @param {!Object} opts.params Specifies the params object for the my sql query.
-     * @param {!Number} [opts.attempts=1] Specifies the number of attempts to execute the run method if something goes wrong.
-     *
-     * @throws An Error if the attempts already passed the limit and the execution wasn't successful.
-     *
-     * @returns {Promise<Array>} A promise with an empty array.
-     */
-    async removeMany({ sql, params, attempts = 1 }) {
-        await this.run({ sql, params, attempts })
-        return []
-    }
 }
 
 module.exports = exports = Model

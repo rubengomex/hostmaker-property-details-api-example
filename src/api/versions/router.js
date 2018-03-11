@@ -8,7 +8,7 @@ const controller = require('./controller')
 const router = new express.Router()
 
 exports.routes = () => {
-    //router.get('/', controller.getVersionsOfProperty)
+    router.get('/', controller.findPropertyVersions)
 
     return router
 }

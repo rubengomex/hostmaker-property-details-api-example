@@ -31,18 +31,18 @@ class MiddlewareHelper {
      * @returns {Object} An object containing the status with false as value, message and dat properties.
      */
     static errorReply({ err = {}, message = '' } = {}) {
-        return { status: false, message: message || err.message, data: [] }
+        return { status: false, message: err.message || message, data: [] }
     }
 
     /**
      * Data reply helper.
      *
      * @static
-     * @param {Object} [data={}] Specifies the data to be sent on the response.
+     * @param {Object} [data=[]] Specifies the data to be sent on the response.
      *
      * @returns {Object} An object containing the status with true as value, message and dat properties.
      */
-    static dataReply(data = {}) {
+    static dataReply(data = []) {
         return { status: true, message: '', data }
     }
 
@@ -111,6 +111,8 @@ class MiddlewareHelper {
         res.setHeader('Access-Control-Allow-Headers', 'Host, Origin, Pragma, Referer, User-Agent, Content-Type, Accept, Accept-Encoding, Accept-Language, Cache-Control, Connection, Content-Length, Content-Type, Authorization, X-Requested-With, Access-Control-Request-Headers, Access-Control-Request-Method')
         res.setHeader('Access-Control-Allow-Credentials', 'true')
         res.setHeader('Access-Control-Max-Age', '1728000')
+
+        next()
     }
 }
 
