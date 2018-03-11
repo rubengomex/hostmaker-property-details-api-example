@@ -1,4 +1,3 @@
 module.exports = {
-    buildDb: require('./buildDb'),
-    buildTestDb: require('./buildTestDb')
+    buildDb: require('./buildDb')
 }

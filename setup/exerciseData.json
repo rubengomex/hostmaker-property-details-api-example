@@ -1,7 +1,8 @@
 {
   "properties": [
     {
-      "owner": "carlos",
+      "id": "004871DE-057D-4F42-A864-78E6558B9DFD",
+      "host": "carlos",
       "address": {
           "line1": "Flat 5",
           "line4": "7 Westbourne Terrace",
@@ -15,7 +16,8 @@
       "incomeGenerated": 2000.34
     },
     {
-      "owner": "ankur",
+      "id": "006BB4B7-E288-4F6E-825E-0BEA608D1080",
+      "host": "ankur",
       "address": {
           "line1": "4",
           "line2": "Tower Mansions",
@@ -31,7 +33,8 @@
       "incomeGenerated": 10000
     },
     {
-      "owner": "elaine",
+      "id": "0198A260-E864-42F7-9141-DECD87D9EE14",
+      "host": "elaine",
       "address": {
           "line1": "4",
           "line2": "332b",

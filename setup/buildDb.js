@@ -1,35 +1,44 @@
+const _ = require('lodash')
+const nunjucks = require('nunjucks')
 const rgAsync = require('rg-async')
 const config = require('../src/configuration')
 const { MySqlRunner } = require('../src/database')
+const { GenericUtils } = require('../src/utils')
 const queries = require('./queries')
 const data = require('./exerciseData')
 const db = config.get('DB_NAME')
 const tables = config.get('TABLE_NAMES')
-const dbRunner = new MySqlRunner()
+let dbRunner = new MySqlRunner({ user: { db: '' } })
 
 module.exports = { reset, drop, create, addTables, cleanTables, cleanTable, addTablesContent, addTableContent }
 
-async function reset({ dbName = db }) {
+async function reset({ dbName = db } = {}) {
     await drop({ dbName })
+
     await create({ dbName, cleanTable })
 }
 
 async function drop({ dbName = db }) {
-    await dbRunner.run({ sql: queries.dropDb(), params: { dbName }, attempts: 1 })
+    await dbRunner.run({ sql: nunjucks.renderString(queries.dropDb(), { dbName }), attempts: 1 })
 }
 
 async function create({ dbName = db } = {}) {
-    await dbRunner.run({ sql: queries.createDb(), params: { dbName }, attempts: 1 })
+    await dbRunner.run({ sql: nunjucks.renderString(queries.createDb(), { dbName }), attempts: 1 })
+    dbRunner = new MySqlRunner() // I need to reset the mysql runner to set database for hostmaker_example
     await addTables()
 }
 
 async function addTables({ tableNames = tables, content = data } = {}) {
     await rgAsync.each(tables, async (tableName) => {
-        await dbRunner.run({ sql: queries.createTable(), params: { tableName }, attempts: 1 })
+        let methodToCall = _.camelCase(`create ${tableName}Table`)
+        const createSql = queries[methodToCall]
+        if (!createSql) { return }
+
+        await dbRunner.run({ sql: createSql(), attempts: 1 })
         await cleanTable({ tableName })
         await addTableContent({
             tableName,
-            body: tableName === 'property_version' ? content['properties'] : content[tableName] })
+            body: _.camelCase(tableName) === 'propertyVersions' ? content['properties'] : content[_.camelCase(tableName)] })
     })
 }
 
@@ -40,30 +49,45 @@ async function cleanTables({ tableNames = tables } = {}) {
 }
 
 async function cleanTable({ tableName }) {
-    await dbRunner.run({ sql: queries.cleanTable(), params: { tableName }, attempts: 1 })
+    const methodToCall = _.camelCase(`clean ${tableName}Table`)
+    const cleanSql = queries[methodToCall]
+    if (!cleanSql) { return }
+    await dbRunner.run({ sql: cleanSql(), attempts: 1 })
 }
 
 async function addTablesContent({ content = data, tableNames = tables } = {}) {
     await rgAsync.each(tableNames, async (tableName) => {
-        const dataToAdd = content[tableName]
+        const dataToAdd = content[_.camelCase(tableName)]
         await addTableContent({ tableName, body: dataToAdd })
     })
 }
 
 async function addTableContent({ tableName, body }) {
-    const insertTableContentQuery = queries.getInsertTableContentQuery({ tableName })
-    if (!body.address) {
-        await dbRunner.run({ sql: insertTableContentQuery, params: body, attempts: 1 })
-        return
+    if (_.camelCase(tableName) === 'propertyVersions') {
+        body = body.map(obj => {
+            obj.propertyId = obj.id
+            obj.id = GenericUtils.getNewId()
+            obj.version = 1
+            return obj
+        })
     }
 
-    const addressKeys = Object.keys(body.address)
-    const concatAddress = addressKeys.reduce((acc, key) => {
-        acc += body.address[key]
-        return acc
-    }, '')
+    const methodToCall = _.camelCase(`insert ${tableName}TableContent`)
+    const insertTableContentQuery = queries[methodToCall]
+    if (!insertTableContentQuery) { return }
 
-    await dbRunner({ sql: insertTableContentQuery, params: { ...body, address: concatAddress }, attempts: 1 })
+    await rgAsync.each(body, async params => {
+        if (!params.address) {
+            await dbRunner.run({ sql: insertTableContentQuery(), params, attempts: 1 })
+            return
+        }
+
+        const addressKeys = Object.keys(params.address)
+        const concatAddress = addressKeys.map(key => params.address[key]).join(' ')
+        console.log({ ...params, address: concatAddress })
+
+        await dbRunner.run({ sql: insertTableContentQuery(), params: { ...params, address: concatAddress }, attempts: 1 })
+    })
 }
 
 if (require.main === module) {

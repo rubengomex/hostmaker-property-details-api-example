@@ -4,10 +4,10 @@
     "PORT": 3000,
     "CLIENT_DB": {
         "user": "root",
-        "password": "",
+        "password": "mysql4All",
         "database": "hostmaker_example",
         "host": "localhost"
     },
     "DB_NAME": "hostmaker_example",
-    "TABLE_NAMES": ["property", "property_version"]
+    "TABLE_NAMES": ["properties", "property_versions"]
 }

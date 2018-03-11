@@ -10,7 +10,7 @@ const { MySqlConnection } = require('../../connections')
 class MySqlRunner extends Runner {
     /**
      * @constructor
-     * @param {!Object} opts Specifies the options for the mysql runner constructor.
+     * @param {!Object} [opts={}] Specifies the options for the mysql runner constructor.
      * @param {!String} [opts.name='mysqlRunner'] Specifies the name to attached to the mysql runner.
      * @param {!Object} [opts.user={}] Specifies the current user.
      * @param {!Object} [opts.user.name] Specifies the name of the user.
@@ -19,7 +19,7 @@ class MySqlRunner extends Runner {
      * @param {!Object} [opts.user.host] Specifies the host to use.
      * @param {!Object} [opts.connection=MySqlConnection] Specifies the connection to use.
      */
-    constructor({ name, user: { name: username, pass, db, host: dbHost } = {}, Connection }) {
+    constructor({ name, user: { name: username, pass, db, host: dbHost } = {}, Connection } = {}) {
         super({ name: name || 'mysqlRunner', connection: Connection || new MySqlConnection({ username, pass, db, dbHost }) })
     }
 

@@ -8,7 +8,7 @@ class PropertyQueries {
                     pro.numberOfBedrooms as numberOfBedrooms,
                     pro.numberOfBathrooms as numberOfBathrooms,
                     pro.incomeGenerated as incomeGenerated
-            FROM    property as pro
+            FROM    properties as pro
             WHERE   1 = 1
             {% if id -%}
             AND     pro.id = :id
@@ -18,7 +18,7 @@ class PropertyQueries {
 
     static create() {
         return `
-            INSERT INTO property (id, host, address, airbnbId, numberOfBedrooms, numberOfBathrooms, incomeGenerated) VALUES 
+            INSERT INTO properties (id, host, address, airbnbId, numberOfBedrooms, numberOfBathrooms, incomeGenerated) VALUES 
             (
                 :id,
                 :host,
@@ -33,7 +33,7 @@ class PropertyQueries {
 
     static update() {
         return `
-            UPDATE property pro 
+            UPDATE properties pro 
             SET 
                 pro.host = :host,
                 pro.address = :address,
@@ -46,7 +46,7 @@ class PropertyQueries {
     }
 
     static remove() {
-        return 'DELETE FROM property WHERE id = :id'
+        return 'DELETE FROM properties WHERE id = :id'
     }
 }
 

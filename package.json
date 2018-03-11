@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "setup:db": "node setup/buildDb",
-    "clear:db": "node setup/clearDb",
     "lint": "eslint ./src/**/*.js",
     "watch:lint": "esw -w --cache --clear --color",
     "clean:jsdocs": "rimraf docs",

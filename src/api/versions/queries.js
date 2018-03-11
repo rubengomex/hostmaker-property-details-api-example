@@ -10,8 +10,8 @@ class VersionQueries {
                         pro.numberOfBathrooms as numberOfBathrooms,
                         pro.incomeGenerated as incomeGenerated,
                         prov.version as version
-            FROM        property as pro
-            INNER JOIN  property_version as prov ON prov.propertyId = pro.id
+            FROM        properties as pro
+            INNER JOIN  property_versions as prov ON prov.propertyId = pro.id
             WHERE       pro.id = :propertyId
             ORDER BY    DESC
             `
@@ -20,8 +20,8 @@ class VersionQueries {
     static findLastVersion() {
         return `
             SELECT      prov.version as version
-            FROM        property as pro
-            INNER JOIN  property_version as prov ON prov.propertyId = pro.id
+            FROM        properties as pro
+            INNER JOIN  property_versions as prov ON prov.propertyId = pro.id
             WHERE       pro.id = :propertyId
             ORDER BY    DESC
             LIMIT       1
@@ -30,7 +30,7 @@ class VersionQueries {
 
     static create() {
         return `
-            INSERT INTO property_version (id, propertyId, host, address, airbnbId, numberOfBedrooms, numberOfBathrooms, incomeGenerated, version) VALUES 
+            INSERT INTO property_versions (id, propertyId, host, address, airbnbId, numberOfBedrooms, numberOfBathrooms, incomeGenerated, version) VALUES 
             (
                 :id,
                 :propertyId,
