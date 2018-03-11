@@ -1,5 +1,5 @@
 const nunjucks = require('nunjucks')
-const { NumberUtils, StringUtils } = require('../../utils')
+const { NumberUtils, StringUtils, GenericUtils } = require('../../utils')
 const Model = require('../../model')
 const VersionModel = require('../versions/model')
 const Queries = require('./queries')
@@ -20,7 +20,7 @@ class PropertyModel extends Model {
     }
 
     async create({ body }) {
-        body = { ...this.checkValidData(body) }
+        body = { id: GenericUtils.getNewId(), ...this.checkValidData(body) }
 
         const id = await super.create({ sql: Queries.create(), params: body })
         const createdProperty = await this.findOne({ id })

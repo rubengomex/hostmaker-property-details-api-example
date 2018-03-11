@@ -27,12 +27,11 @@ async function addTables({ tableNames = tables, content = data } = {}) {
     await rgAsync.each(tables, async (tableName) => {
         await dbRunner.run({ sql: queries.createTable(), params: { tableName }, attempts: 1 })
         await cleanTable({ tableName })
-        await addTableContent({ 
-            tableName, 
-            body: tableName === 'properties_version' ? content['properties'] : content[tableName] })
+        await addTableContent({
+            tableName,
+            body: tableName === 'property_version' ? content['properties'] : content[tableName] })
     })
 }
-
 
 async function cleanTables({ tableNames = tables } = {}) {
     await rgAsync.each(tables, async (tableName) => {
@@ -53,7 +52,7 @@ async function addTablesContent({ content = data, tableNames = tables } = {}) {
 
 async function addTableContent({ tableName, body }) {
     const insertTableContentQuery = queries.getInsertTableContentQuery({ tableName })
-    if(!body.address) {
+    if (!body.address) {
         await dbRunner.run({ sql: insertTableContentQuery, params: body, attempts: 1 })
         return
     }
@@ -67,11 +66,11 @@ async function addTableContent({ tableName, body }) {
     await dbRunner({ sql: insertTableContentQuery, params: { ...body, address: concatAddress }, attempts: 1 })
 }
 
-if(require.main === module) {
+if (require.main === module) {
     reset().then(() => {
-        console.info(`Setup ${db} database successfully!`);
+        console.info(`Setup ${db} database successfully!`)
     }).catch(err => {
-        console.error('An error occurs with setup process');
-        console.error(err);
-    });
+        console.error('An error occurs with setup process')
+        console.error(err)
+    })
 }

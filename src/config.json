@@ -7,5 +7,7 @@
         "password": "",
         "database": "hostmaker_example",
         "host": "localhost"
-    }
+    },
+    "DB_NAME": "hostmaker_example",
+    "TABLE_NAMES": ["property", "property_version"]
 }
