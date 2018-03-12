@@ -15,6 +15,7 @@ A simple Web Api that allows the user to manage HostMaker properties details.
     * [api docs](#api-docs)
 * [Coverage](#coverage)
 * [Build](#build)
+* [Api Endpoints](#api-endpoints)
 * [TODO](#todo)
 
 
@@ -175,6 +176,20 @@ You can build the application by running
 ```
 
 This is a command that will build the `js docs`, `api docs`, run the eslint through all the source code, run `unit` and `integration` tests, show the `coverage`, `js docs` and `api docs` generated.
+
+
+### Api Endpoints
+
+* Api Available endpoints:
+
+| Method   | EndPoint                   | Description |
+|----------|----------------------------|-----------------------------------|
+| GET      | /properties                | Get all properties                |
+| GET      | /properties/:id            | Get a property                    |
+| GET      | /properties/:id/versions   | Get the versions of the property  |
+| POST     | /properties                | Creates a property                |
+| PUT      | /porperties/:id            | Edits a property                  |
+| DELETE   | /properties/:id            | Removes a property                |
 
 ### TODO
 
