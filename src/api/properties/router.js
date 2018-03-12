@@ -4,7 +4,7 @@
  */
 
 const express = require('express')
-const versions = require('../versions/router')
+const versionsController = require('../versions/controller')
 const controller = require('./controller')
 const router = new express.Router()
 
@@ -13,7 +13,7 @@ exports.routes = () => {
         .get(controller.findAll)
         .post(controller.create)
 
-    router.use('/:id/versions', versions.routes())
+    router.get('/:id/versions', versionsController.findPropertyVersions)
 
     router.route('/:id')
         .get(controller.findById)

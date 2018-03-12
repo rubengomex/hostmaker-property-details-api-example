@@ -12,9 +12,9 @@
     "clean:docs": "npm run clean:jsdocs && npm run clean:apidocs",
     "clean:coverage": "rimraf coverage",
     "build:jsdocs": "npm run clean:jsdocs && jsdoc -c conf.json -R README.md",
-    "show:jsdocs": "npm run build:jsdocs && opener docs/index.html",
+    "show:jsdocs": "opener docs/index.html",
     "build:apidocs": "npm run clean:apidocs && apidoc -i src/ -o apidocs/",
-    "show:apidocs": "npm run build:apidocs && opener apidocs/index.html",
+    "show:apidocs": "opener apidocs/index.html",
     "build:docs": "npm run build:jsdocs && npm run build:apidocs",
     "show:docs": "npm run show:jsdocs && npm run show:apidocs",
     "show:coverage": "opener ./coverage/lcov-report/index.html",
@@ -24,7 +24,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "start:dev": "npm run watch:lint",
     "start": "nodemon .",
-    "build": "npm run build:docs && npm run lint && npm t && npm run show:coverage",
+    "build": "npm run build:docs && npm run lint && npm t && npm run show:coverage && npm run show:docs",
     "prepublishOnly": "npm run lint && npm t"
   },
   "repository": {

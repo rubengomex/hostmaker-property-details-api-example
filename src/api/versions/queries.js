@@ -12,7 +12,7 @@ class VersionQueries {
                         prov.version as version
             FROM        properties as pro
             INNER JOIN  property_versions as prov ON prov.propertyId = pro.id
-            WHERE       pro.id = :propertyId
+            WHERE       prov.propertyId = :propertyId
             ORDER BY    version DESC
             `
     }
