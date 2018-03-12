@@ -71,9 +71,9 @@ You can run the api by executing the following command
     $ npm start
 ```
 
-By default the `port` is set to `3000`, but again you always can change this in the `config.json` in the `src` folder to follow your needs.
+By default the `port` is set to `3000`, but again you always can change the `config.json` in the `src` folder to follow your needs.
 
-If you want to run run eslint as well when you start the app to perhaps implementing more features you can run the following command:
+If you want to run eslint as well when you start the app to perhaps, implementing more features, you can run the following command:
 
 ```bash
     $ npm run start:dev
@@ -173,4 +173,4 @@ You can build the application by running
     $ npm run build 
 ```
 
-Tis is a command that will build the `js docs`, `api docs`, run the eslint through all the source code, run `unit` and `integration` tests, show the `coverage`, `js docs` and `api docs` generated.
+This is a command that will build the `js docs`, `api docs`, run the eslint through all the source code, run `unit` and `integration` tests, show the `coverage`, `js docs` and `api docs` generated.
