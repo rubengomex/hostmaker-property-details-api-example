@@ -1,8 +1,5 @@
 instrumentation:
     root: ./src
-    excludes:
-        - ./index.js
-        - '*.spec.js'
 checks:
     global:
         statements: 95

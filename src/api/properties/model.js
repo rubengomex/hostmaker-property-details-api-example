@@ -63,8 +63,8 @@ class PropertyModel extends Model {
         if (!StringUtils.isValidString({ value: line1 })) { throw new Error(this.locales.line1IsMandatoryOrInvalid) }
         if (!StringUtils.isValidString({ value: line4 })) { throw new Error(this.locales.line4IsMandatoryOrInvalid) }
         if (!StringUtils.isValidString({ value: postCode })) { throw new Error(this.locales.postCodeIsMandatoryOrInvalid) }
-        if (!StringUtils.isValidString({ value: city })) { throw new Error(this.locales.postCodeIsMandatoryOrInvalid) }
-        if (!StringUtils.isValidString({ value: country })) { throw new Error(this.locales.postCodeIsMandatoryOrInvalid) }
+        if (!StringUtils.isValidString({ value: city })) { throw new Error(this.locales.cityIsMandatoryOrInvalid) }
+        if (!StringUtils.isValidString({ value: country })) { throw new Error(this.locales.countryIsMandatoryOrInvalid) }
 
         line2 = StringUtils.getDefaultString({ value: line2, defaultValue: '' })
         line3 = StringUtils.getDefaultString({ value: line3, defaultValue: '' })
