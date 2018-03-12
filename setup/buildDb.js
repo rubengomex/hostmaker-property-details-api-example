@@ -65,10 +65,11 @@ async function addTablesContent({ content = data, tableNames = tables } = {}) {
 async function addTableContent({ tableName, body }) {
     if (_.camelCase(tableName) === 'propertyVersions') {
         body = body.map(obj => {
-            obj.propertyId = obj.id
-            obj.id = GenericUtils.getNewId()
-            obj.version = 1
-            return obj
+            const newObj = { ...obj }
+            newObj.propertyId = obj.id
+            newObj.id = GenericUtils.getNewId()
+            newObj.version = 1
+            return newObj
         })
     }
 

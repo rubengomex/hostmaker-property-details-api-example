@@ -10,12 +10,12 @@ class PropertyModel extends Model {
     }
 
     async findAll() {
-        const properties = super.findAll({ sql: nunjucks.renderString(Queries.find(), {}) })
+        const properties = super.find({ sql: nunjucks.renderString(Queries.find(), {}) })
         return properties
     }
 
     async findOne({ id }) {
-        const property = await super.findOne({ sql: nunjucks.renderString(Queries.find(), { id }) })
+        const property = await super.findOne({ sql: nunjucks.renderString(Queries.find(), { id }), params: { id } })
         return property
     }
 
