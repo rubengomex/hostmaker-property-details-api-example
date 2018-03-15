@@ -57,11 +57,11 @@ class Model extends MySqlRunner {
      *
      * @throws An Error if the attempts already passed the limit and the execution wasn't successful.
      *
-     * @returns {Promise<String>} A promise with the id of the item inserted.
+     * @returns {Promise<String>} A promise with an empty array.
      */
     async create({ sql, params, attempts = 1 }) {
-        const { insertedId: id } = await this.run({ sql, params, attempts })
-        return id
+        await this.run({ sql, params, attempts })
+        return []
     }
 
     /**

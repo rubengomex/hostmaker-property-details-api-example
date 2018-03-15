@@ -37,10 +37,10 @@ class PropertyQueries {
             SET 
                 pro.host = :host,
                 pro.address = :address,
-                pro.address = :airbnbId,
-                pro.address = :numberOfBedrooms,
-                pro.address = :numberOfBathrooms,
-                pro.address = :incomeGenerated
+                pro.airbnbId = :airbnbId,
+                pro.numberOfBedrooms = :numberOfBedrooms,
+                pro.numberOfBathrooms = :numberOfBathrooms,
+                pro.incomeGenerated = :incomeGenerated
             WHERE pro.id = :id
         `
     }

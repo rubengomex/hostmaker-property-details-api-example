@@ -25,6 +25,11 @@ class VersionModel extends Model {
         await super.create({ sql: Queries.create(), params })
         return []
     }
+
+    async removeAll({ propertyId }) {
+        await this.run({ sql: Queries.removePropertyVersions(), params: { propertyId } })
+        return []
+    }
 }
 
 module.exports = exports = new VersionModel({ name: 'Version' })

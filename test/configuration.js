@@ -1,3 +1,4 @@
+process.env.ENVIRONMENT = 'test'
 const chai = require('chai')
 const { expect, should } = require('chai')
 const sinon = require('sinon')
@@ -13,6 +14,7 @@ global.request = supertest(app)
 should()
 chai.use(sinonChai)
 chai.use(chaiPromise)
+
 
 
 

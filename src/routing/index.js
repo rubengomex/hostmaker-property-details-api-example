@@ -31,11 +31,12 @@
  */
 
 const express = require('express')
+const availableRoutes = require('./routes')
 const properties = require('../api/properties/router')
 const router = new express.Router()
 
 exports.routes = () => {
-    router.get('/', (req, res, next) => res.send({ message: 'HostMaker api example' }))
+    router.get('/', (req, res, next) => res.send({ status: true, message: 'HostMaker api example', availableRoutes }))
     router.use('/properties', properties.routes())
 
     return router

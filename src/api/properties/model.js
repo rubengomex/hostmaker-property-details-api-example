@@ -5,8 +5,9 @@ const VersionModel = require('../versions/model')
 const Queries = require('./queries')
 
 class PropertyModel extends Model {
-    constructor({ name, Connection }) {
+    constructor({ name, Connection, validAirbnbIds = [] }) {
         super({ name })
+        this.validAirbnbIds = validAirbnbIds
     }
 
     async findAll() {
@@ -22,8 +23,8 @@ class PropertyModel extends Model {
     async create({ body }) {
         body = { id: GenericUtils.getNewId(), ...this.checkValidData(body) }
 
-        const id = await super.create({ sql: Queries.create(), params: body })
-        const createdProperty = await this.findOne({ id })
+        await super.create({ sql: Queries.create(), params: body })
+        const createdProperty = await this.findOne({ id: body.id })
         await VersionModel.create(createdProperty) // creates a new version starting from 1
         return createdProperty
     }
@@ -41,7 +42,13 @@ class PropertyModel extends Model {
     }
 
     async remove({ id }) {
-        await super.remove({ sql: Queries.remove(), params: { id } })
+        const deletedProperty = await this.findOne({ id })
+        await Promise.all([
+            super.remove({ sql: Queries.remove(), params: { id } }),
+            VersionModel.removeAll({ propertyId: id })
+        ])
+
+        return deletedProperty
     }
 
     checkValidData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated }) {
@@ -80,7 +87,9 @@ class PropertyModel extends Model {
 
     parseAddress(address) {
         const keys = Object.keys(address)
-        return keys.map(key => address[key]).join(' ')
+        return keys.map(key => address[key])
+            .filter(v => v && v !== '')
+            .join(' ')
     }
 
     parseValidUpdateData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated, property }) {

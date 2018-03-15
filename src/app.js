@@ -21,6 +21,7 @@ app.use('/', router.routes())
 app.use(MiddlewareHelper.logErrors)
 app.use(MiddlewareHelper.errorHandler)
 
+exports.app = app
 exports.start = async () => {
     try {
         await app.listen(port)

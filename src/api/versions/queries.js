@@ -23,7 +23,7 @@ class VersionQueries {
             FROM        properties as pro
             INNER JOIN  property_versions as prov ON prov.propertyId = pro.id
             WHERE       pro.id = :propertyId
-            ORDER BY    DESC
+            ORDER BY    version DESC
             LIMIT       1
         `
     }
@@ -43,6 +43,10 @@ class VersionQueries {
                 :version
             )
         `
+    }
+
+    static removePropertyVersions() {
+        return `DELETE FROM property_versions WHERE propertyId = :propertyId`
     }
 }
 

@@ -41,9 +41,7 @@ module.exports = { findPropertyVersions }
 * @apiUse defaultErrorExample
 */
 async function findPropertyVersions(req, res, next) {
-    console.log(req.params)
     const { id: propertyId } = req.params
-    console.log(propertyId)
     try {
         const versions = await VersionModel.findAll({ propertyId })
         res.reply(versions)

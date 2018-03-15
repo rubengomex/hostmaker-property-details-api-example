@@ -140,8 +140,8 @@ describe('Model', function() {
             })
         })
 
-        it('it should returned the id of the created item', function() {
-            expect(this.modelInstance.create({ sql: this.sql, params: this.params, attempts: 2 })).to.eventually.be.deep.equal(1)
+        it('it should returned an empty array', function() {
+            expect(this.modelInstance.create({ sql: this.sql, params: this.params, attempts: 2 })).to.eventually.be.deep.equal([])
         })
     })
 

@@ -1,0 +1,34 @@
+{
+    "properties": [
+        {
+            "method": "GET",
+            "endpoint": "/properties",
+            "description": "Get all properties"
+        }, 
+        {
+            "method": "GET",
+            "endpoint": "/properties/:id",
+            "description": "Get a property"
+        }, 
+        {
+            "method": "GET",
+            "endpoint": "/properties/:id/versions",
+            "description": "Get property versions"
+        }, 
+        {
+            "method": "POST",
+            "endpoint": "/properties",
+            "description": "Creates a property"
+        }, 
+        {
+            "method": "PUT",
+            "endpoint": "/properties/:id",
+            "description": "Updates a property"
+        }, 
+        {
+            "method": "DELETE",
+            "endpoint": "/properties/:id",
+            "description": "Deletes a property"
+        }
+    ]
+}

@@ -145,6 +145,7 @@ async function create(req, res, next) {
     const { body } = req
     try {
         const property = await Model.create({ body })
+        Model.validAirbnbIds = [...Model.validAirbnbIds, ...[property.airbnbId]]
         res.reply(property)
     } catch (err) {
         next(err)
