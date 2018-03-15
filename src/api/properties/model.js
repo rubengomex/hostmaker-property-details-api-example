@@ -1,4 +1,5 @@
 const nunjucks = require('nunjucks')
+const axios = require('axios')
 const { NumberUtils, StringUtils, GenericUtils } = require('../../utils')
 const Model = require('../../model')
 const VersionModel = require('../versions/model')
@@ -21,7 +22,8 @@ class PropertyModel extends Model {
     }
 
     async create({ body }) {
-        body = { id: GenericUtils.getNewId(), ...this.checkValidData(body) }
+        const validData = await this.checkValidData(body)
+        body = { id: GenericUtils.getNewId(), ...validData }
 
         await super.create({ sql: Queries.create(), params: body })
         const createdProperty = await this.findOne({ id: body.id })
@@ -33,7 +35,8 @@ class PropertyModel extends Model {
         const property = await this.findOne({ id })
         if (!property) { throw new Error(this.locales.propertyDoesNotExist) }
 
-        body = { ...this.parseValidUpdateData({...body, property}) }
+        const validData = await this.parseValidUpdateData({ ...body, property })
+        body = { ...validData }
         await super.update({ sql: Queries.update(), params: { ...body, id } })
         const updatedProperty = await this.findOne({ id })
 
@@ -51,7 +54,7 @@ class PropertyModel extends Model {
         return deletedProperty
     }
 
-    checkValidData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated }) {
+    async checkValidData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated }) {
         const hostValid = StringUtils.isValidString({ value: host })
         const numberOfBedroomsValid = NumberUtils.isValidNumber({ number: numberOfBedrooms })
         const numberOfBathroomsValid = NumberUtils.isValidNumber({ number: numberOfBathrooms })
@@ -61,7 +64,7 @@ class PropertyModel extends Model {
         if (!hostValid) { throw new Error(this.locales.hostIsMandatoryOrInvalid) }
         if (!numberOfBedroomsValid || (numberOfBedroomsValid && numberOfBedroomsValid < 1)) { throw new Error(this.locales.numberOfBedroomsInvalidOrLessThanOne) }
         if (!numberOfBathroomsValid || (numberOfBathroomsValid && numberOfBathrooms < 1)) { throw new Error(this.locales.numberOfBathroomsInvalidOrLessThanOne) }
-        if (!this.airbnbIdIsValid(airbnbId)) { throw new Error(this.locales.airbnbIdIsInvalid) }
+        if (!(await this.airbnbIdIsValid(airbnbId))) { throw new Error(this.locales.airbnbIdIsInvalid) }
         if (!incomeGeneratedValid || (incomeGeneratedValid && incomeGenerated <= 0)) { throw new Error(this.locales.incomeGeneratedIsInvalidOrLessEqualThanZero) }
         if (!addressValid) { throw new Error(this.locales.addressIsInvalid) }
 
@@ -81,8 +84,18 @@ class PropertyModel extends Model {
         return { host, address: parsedAddress, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated }
     }
 
-    airbnbIdIsValid(airbnbId) { // TODO: check also with axios module if the airbnbId is valid in hostMaker is valid store it in session to after check the valid ones without fetching another http request to hostMaker(it blocks ip)
-        return NumberUtils.isValidNumber({ number: airbnbId })
+    async airbnbIdIsValid(airbnbId) {
+        if (!NumberUtils.isValidNumber({ number: airbnbId })) { return false }
+        if (this.validAirbnbIds.filter(id => id === airbnbId).length !== 0) { return true }
+
+        const { status } = await axios.get(`https://www.airbnb.co.uk/rooms/${airbnbId}`)
+
+        // the exercise say that we get 200 if room is found otherwise we get 302
+        // don't know why but the request always return a 200 OK so I could not distinct what is valid or not based on that
+        if (status !== 200) { return false }
+
+        this.validAirbnbIds.push(airbnbId)
+        return true
     }
 
     parseAddress(address) {
@@ -92,7 +105,7 @@ class PropertyModel extends Model {
             .join(' ')
     }
 
-    parseValidUpdateData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated, property }) {
+    async parseValidUpdateData({ host, address, numberOfBedrooms, numberOfBathrooms, airbnbId, incomeGenerated, property }) {
         const hostValid = StringUtils.isValidString({ value: host })
         const numberOfBedroomsValid = NumberUtils.isValidNumber({ number: numberOfBedrooms })
         const numberOfBathroomsValid = NumberUtils.isValidNumber({ number: numberOfBathrooms })
@@ -103,7 +116,7 @@ class PropertyModel extends Model {
         if (hostValid) { overrideValues.host = host }
         if (numberOfBedroomsValid && numberOfBedroomsValid >= 1) { overrideValues.numberOfBedrooms = numberOfBedrooms }
         if (numberOfBathroomsValid && numberOfBathrooms >= 1) { overrideValues.numberOfBathrooms = numberOfBathrooms }
-        if (this.airbnbIdIsValid(airbnbId)) { overrideValues.airbnbId = airbnbId }
+        if ((await this.airbnbIdIsValid(airbnbId))) { overrideValues.airbnbId = airbnbId }
         if (incomeGeneratedValid && incomeGenerated > 0) { overrideValues.incomeGenerated = incomeGenerated }
         if (!addressValid) { return { ...property, ...overrideValues } }
 

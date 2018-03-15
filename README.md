@@ -16,7 +16,6 @@ A simple Web Api that allows the user to manage HostMaker properties details.
 * [Coverage](#coverage)
 * [Build](#build)
 * [Api Endpoints](#api-endpoints)
-* [TODO](#todo)
 
 
 ### Requirements
@@ -191,7 +190,3 @@ This is a command that will build the `js docs`, `api docs`, run the eslint thro
 | PUT      | /porperties/:id            | Edits a property                  |
 | DELETE   | /properties/:id            | Removes a property                |
 
-### TODO
-
-* Integration tests
-* Check valid airbnbId from [HostMaker](https://hostmaker.com/) using [axios](https://www.npmjs.com/package/axios) module to to the http requests.
