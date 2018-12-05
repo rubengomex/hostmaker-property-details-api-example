@@ -25,7 +25,9 @@
     "start:dev": "npm run watch:lint",
     "start": "nodemon .",
     "build": "npm run build:docs && npm run lint && npm t && npm run show:coverage && npm run show:docs",
-    "prepublishOnly": "npm run lint && npm t"
+    "prepublishOnly": "npm run lint && npm t",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -81,6 +83,8 @@
     "mysql": "2.11.1",
     "nunjucks": "2.5.2",
     "rg-async": "2.5.2",
-    "uuid": "2.0.3"
-  }
+    "uuid": "2.0.3",
+    "snyk": "^1.114.0"
+  },
+  "snyk": true
 }
