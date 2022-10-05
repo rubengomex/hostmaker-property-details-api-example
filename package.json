@@ -25,7 +25,9 @@
     "start:dev": "npm run watch:lint",
     "start": "nodemon .",
     "build": "npm run build:docs && npm run lint && npm t && npm run show:coverage && npm run show:docs",
-    "prepublishOnly": "npm run lint && npm t"
+    "prepublishOnly": "npm run lint && npm t",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -73,14 +75,16 @@
     "supertest": "3.0.0"
   },
   "dependencies": {
-    "axios": "0.18.0",
-    "body-parser": "1.15.2",
-    "express": "4.14.0",
-    "helmet": "2.3.0",
-    "lodash": "4.16.3",
-    "mysql": "2.11.1",
-    "nunjucks": "2.5.2",
-    "rg-async": "2.5.2",
-    "uuid": "2.0.3"
-  }
+    "axios": "0.21.3",
+    "body-parser": "1.18.2",
+    "express": "4.16.0",
+    "helmet": "3.21.1",
+    "lodash": "4.17.21",
+    "mysql": "2.14.0",
+    "nunjucks": "3.2.3",
+    "rg-async": "2.5.4",
+    "uuid": "2.0.3",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
